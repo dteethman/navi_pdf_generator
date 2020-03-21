@@ -34,8 +34,16 @@ def update(table: str, cols: dict, where: dict):
     return execute(f'UPDATE {table} SET {set} WHERE {keys}', tuple(values))
 
 
+def get_active_row(user_id):
+    return execute('SELECT * FROM print_queue WHERE user_id=?', (user_id,)).fetchone()
+
+
 def get_zones() -> list:
     return execute('SELECT * FROM zones').fetchall()
+
+
+def get_zone(zone_id) -> tuple:
+    return execute('SELECT * FROM zones WHERE id=?', (zone_id,)).fetchone()
 
 
 def get_categories(zone_id: int) -> list:
@@ -46,6 +54,10 @@ def get_categories(zone_id: int) -> list:
         (zone_id,)).fetchall()
 
 
+def get_category(cat_id) -> tuple:
+    return execute('SELECT * FROM categories WHERE id=?', (cat_id,)).fetchone()
+
+
 def get_brands(cat_id: int) -> list:
     return execute(
         'SELECT id, brand, display_name, is_final FROM brands '
@@ -54,12 +66,20 @@ def get_brands(cat_id: int) -> list:
         (cat_id,)).fetchall()
 
 
+def get_brand(brand_id) -> tuple:
+    return execute('SELECT * FROM brands WHERE id=?', (brand_id,)).fetchone()
+
+
 def get_models(brand_id: int) -> list:
     return execute(
         'SELECT id, model FROM models '
         'JOIN models_to_brands ON id = models_to_brands.model_id '
         'WHERE models_to_brands.brand_id = ?',
         (brand_id,)).fetchall()
+
+
+def get_model(model_id) -> tuple:
+    return execute('SELECT * FROM models WHERE id=?', (model_id,)).fetchone()
 
 
 def add_to_queue(cols: dict, user_id):
