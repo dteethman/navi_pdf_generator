@@ -20,6 +20,13 @@ def executemany(query, data):
     return cursor
 
 
+def update(table: str, cols: dict, where: dict):
+    set = ','.join([f'{col}=?' for col, value in cols.items()])
+    keys = ' AND '.join([f'{key}=?' for key, value in where.items()])
+    values = list(cols.values()) + list(where.values())
+    return execute(f'UPDATE {table} SET {set} WHERE {keys}', tuple(values))
+
+
 def get_zones() -> list:
     return execute('SELECT * FROM zones').fetchall()
 
@@ -48,9 +55,14 @@ def get_models(brand_id: int) -> list:
         (brand_id,)).fetchall()
 
 
+def add_to_queue(cols: dict, user_id):
+    pass
+
+
 if __name__ == '__main__':
     print(get_zones())
     print(get_categories(1))
     print(get_brands(1))
     print(get_models(1))
     print(get_models(3))
+    update('print_queue', {'zone_id': 1}, {'user_id': 359, 'is_active': 1})
