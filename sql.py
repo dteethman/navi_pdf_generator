@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('database.db')
+conn = sqlite3.connect('database.db', check_same_thread=False)
 
 
 def execute(query, data=None):
@@ -18,6 +18,13 @@ def executemany(query, data):
     cursor.executemany(query, data)
     conn.commit()
     return cursor
+
+
+def insert_row(table: str, cols: dict):
+    names = ','.join(list(cols.keys()))
+    count = ('?,' * len(cols.keys()))[:-1]
+    values = tuple(cols.values())
+    return execute(f'INSERT INTO {table} ({names}) VALUES ({count})', values)
 
 
 def update(table: str, cols: dict, where: dict):
@@ -59,10 +66,18 @@ def add_to_queue(cols: dict, user_id):
     pass
 
 
+def delete_from_queue(user_id):
+    try:
+        return execute(f'DELETE FROM print_queue WHERE user_id=? AND is_active=1', (user_id,))
+    except sqlite3.OperationalError as err:
+        print(f'Ошибка: {err}')
+
+
 if __name__ == '__main__':
     print(get_zones())
     print(get_categories(1))
     print(get_brands(1))
     print(get_models(1))
     print(get_models(3))
-    update('print_queue', {'zone_id': 1}, {'user_id': 359, 'is_active': 1})
+    # update('print_queue', {'zone_id': 1}, {'user_id': 359, 'is_active': 1})
+    delete_from_queue(359)
