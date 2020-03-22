@@ -1,24 +1,31 @@
 [
   {
-    "icon": "icons/protect.png",
-    "zone": "Защищай смартфон",
+    "icon": "icons/listen.png",
+    "zone": "Слушай",
     "title": "Inoi",
     "category": "Чехлы",
-    "quantity": 2
+    "quantity": 1
   },
   {
-    "icon": "icons/protect.png",
-    "zone": "Защищай смартфон",
+    "icon": "icons/hand.png",
+    "zone": "Держи",
     "title": "Vivo",
     "category": "Чехлы",
-    "quantity": 2
+    "quantity": 1
   },
   {
     "icon": "icons/protect.png",
     "zone": "Защищай смартфон",
     "title": "Универсальные",
     "category": "Чехлы",
-    "quantity": 2
+    "quantity": 1
+  },
+  {
+    "icon": "icons/samsung.jpg",
+    "zone": "Аксессуары Samsung",
+    "title": "",
+    "category": "Чехлы",
+    "quantity": 1
   },
   {
     "icon": "icons/protect.png",

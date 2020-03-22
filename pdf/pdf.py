@@ -24,7 +24,7 @@ def chunks(l, n):
 def generate_navis(data):
     navis = []
     for d in data:
-        navis += [Navi(d['zone'], d['title'], d['category']) for i in range(d['quantity'])]
+        navis += [Navi(d['icon'], d['zone'], d['title'], d['category']) for i in range(d['quantity'])]
     result = []
     for c in chunks(navis, 21):
         result += c + [NextPageTemplate('ThreeCols'), PageBreak()]
