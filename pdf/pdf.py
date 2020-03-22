@@ -49,4 +49,5 @@ def create_pdf():
     doc.build(generate_navis(get_data()))
 
 
-create_pdf()
+if __name__ == '__main__':
+    create_pdf()
