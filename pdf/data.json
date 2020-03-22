@@ -1,0 +1,37 @@
+[
+  {
+    "icon": "icons/protect.png",
+    "zone": "Защищай смартфон",
+    "title": "Inoi",
+    "category": "Чехлы",
+    "quantity": 2
+  },
+  {
+    "icon": "icons/protect.png",
+    "zone": "Защищай смартфон",
+    "title": "Vivo",
+    "category": "Чехлы",
+    "quantity": 2
+  },
+  {
+    "icon": "icons/protect.png",
+    "zone": "Защищай смартфон",
+    "title": "Универсальные",
+    "category": "Чехлы",
+    "quantity": 2
+  },
+  {
+    "icon": "icons/protect.png",
+    "zone": "Защищай Oppo",
+    "title": "Reno Z",
+    "category": "Чехлы",
+    "quantity": 1
+  },
+  {
+    "icon": "icons/protect.png",
+    "zone": "Защищай Oppo",
+    "title": "A5 2020 и A9 2020",
+    "category": "Чехлы",
+    "quantity": 32
+  }
+]
