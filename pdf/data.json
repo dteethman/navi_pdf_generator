@@ -24,6 +24,13 @@
     "icon": "icons/samsung.jpg",
     "zone": "Аксессуары Samsung",
     "title": "",
+    "category": "Чехлы чехлы<br/>Чехлы чехлы",
+    "quantity": 1
+  },
+  {
+    "icon": "icons/samsung.jpg",
+    "zone": "Аксессуары Samsung",
+    "title": "",
     "category": "Чехлы",
     "quantity": 1
   },
@@ -37,8 +44,8 @@
   {
     "icon": "icons/protect.png",
     "zone": "Защищай Oppo",
-    "title": "A5 2020 и A9 2020",
+    "title": "A5 2020<br/>и A9 2020",
     "category": "Чехлы",
-    "quantity": 32
+    "quantity": 2
   }
 ]

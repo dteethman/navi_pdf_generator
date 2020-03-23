@@ -30,12 +30,12 @@ class Navi(Flowable):
 
         # Верхняя плашка
         self.canv.rect(0, 40 * mm - 10 * mm, self.width, 10 * mm, fill=1, stroke=0)
-        self.draw_icon_frame()
-        self.draw_zone_frame()
-        self.draw_category_frame()
-        self.draw_title_frame()
+        self.draw_icon()
+        self.draw_zone()
+        self.draw_category()
+        self.draw_title()
 
-    def draw_icon_frame(self):
+    def draw_icon(self):
         self.canv.saveState()
         self.canv.setFillColorRGB(0, 0, 0)
         icon_frame = Frame(3 * mm, 40 * mm - 1.5 * mm - 7 * mm, 7 * mm, 7 * mm, showBoundary=0,
@@ -44,7 +44,7 @@ class Navi(Flowable):
         icon_frame.addFromList([icon], self.canv)
         self.canv.restoreState()
 
-    def draw_zone_frame(self):
+    def draw_zone(self):
         self.canv.saveState()
         offset = 9*mm if len(self.zone) < 10 else 0
         width = 54*mm if len(self.zone) < 10 else 45*mm
@@ -58,9 +58,14 @@ class Navi(Flowable):
         zone_frame.addFromList([keep], self.canv)
         self.canv.restoreState()
 
-    def draw_title_frame(self):
+    def draw_title(self):
         self.canv.saveState()
-        offset = 5*mm if self.category == '' else 0
+        if self.category == '':
+            offset = 5*mm if '<br/>' not in self.title else 3
+        elif '<br/>' not in self.title:
+            offset = 3*mm
+        else:
+            offset = 0
         style = ParagraphStyle(name='category', fontSize=24, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
                                alignment=1, leading=24, splitLongWords=False, spaceShrinkage=0)
         zone_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
@@ -70,7 +75,7 @@ class Navi(Flowable):
         zone_frame.addFromList([keep], self.canv)
         self.canv.restoreState()
 
-    def draw_category_frame(self):
+    def draw_category(self):
         self.canv.saveState()
         style = ParagraphStyle(name='category', fontSize=12, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
                                alignment=1, leading=12, splitLongWords=False, spaceShrinkage=0)
