@@ -14,15 +14,16 @@ def generate_printable_data(queue_id):
     brand = sql.get_brand(row[4])
     model = sql.get_model(row[5])
     quantity = int(row[6])
+    icon = str(sql.get_zone(row[2])[2])
 
     model_str = ''
-    if brand is not None:
-        model_str += str(brand[2])
+    if brand is not None and brand[4] == 0:
+        model_str += f'{brand[2]} '
     if model is not None:
-        model_str += str(model[1])
+        model_str += f'{model[1]}'
 
     return {
-        "icon": "listen.png",
+        "icon": icon,
         "zone": zone_str,
         "title": model_str,
         "category": category_str,
