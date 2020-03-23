@@ -4,6 +4,7 @@ import sql
 
 @bot.message_handler(commands=['show'])
 def handle_show(msg):
+    bot.delete_message(msg.chat.id, msg.message_id)
     queue = sql.get_queue(msg.chat.id)
     q_ids = [q[0] for q in queue]
     data = [generate_printable_data(q_id) for q_id in q_ids]
@@ -16,3 +17,12 @@ def handle_show(msg):
     keyboard = get_inline_keyboard(buttons)
 
     bot.send_message(msg.chat.id, text=message, reply_markup=keyboard, parse_mode='Markdown')
+
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('show'))
+def handle_clear(call):
+    msg = call.message
+    show = int(call.data.split('=')[-1])
+
+    if show == 0:
+        bot.delete_message(msg.chat.id, msg.message_id)
