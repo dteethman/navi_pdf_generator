@@ -22,7 +22,7 @@ def generate_printable_data(queue_id):
         model_str += str(model[1])
 
     return {
-        "icon": "icons/listen.png",
+        "icon": "listen.png",
         "zone": zone_str,
         "title": model_str,
         "category": category_str,
