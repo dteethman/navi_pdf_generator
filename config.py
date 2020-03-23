@@ -1,0 +1,2 @@
+TOKEN = '1050022917:AAFSfi_dRV3bkDDQKqMYao9lq25KNbhYLZM'
+PROXY = {'https': 'https://163.172.189.32:8811'}

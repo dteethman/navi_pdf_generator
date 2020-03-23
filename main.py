@@ -6,7 +6,6 @@ import pkgutil
 import os
 
 
-
 modules = []
 for _, name, _ in pkgutil.iter_modules(actions.__path__):
     modules.append(name)
