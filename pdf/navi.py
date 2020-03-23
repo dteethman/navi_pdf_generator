@@ -56,15 +56,5 @@ class Navi(Flowable):
         self.canv.restoreState()
 
     def calc_zone_offset(self):
-        a = {
-            9: -1*mm,
-            8: -1.25*mm,
-            7: -1.5*mm,
-            6: -1.75*mm,
-            5: -2*mm,
-            4: -2.25*mm,
-            3: -2.5*mm,
-            2: -2.75*mm,
-            1: -3*mm
-        }
-        return a[len(self.zone)] if len(self.zone) < 10 else 0
+        n = len(self.zone)
+        return (n - 13) / 4 if n < 10 else 0
