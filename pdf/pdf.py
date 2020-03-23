@@ -11,7 +11,7 @@ PAGE_WIDTH, PAGE_HEIGHT = A4
 
 def get_data():
     f = open('data.json', encoding='utf-8')
-    data = json.loads(f.read())
+    data = f.read()
     f.close()
     return data
 
@@ -42,12 +42,13 @@ def generate_frames():
     return result
 
 
-def create_pdf():
+def create_pdf(data):
+    d = json.loads(data)
     doc = SimpleDocTemplate('test.pdf', pagesize=A4, setTitle='Тест',
                             topMargin=10*mm, rightMargin=10*mm, bottomMargin=10*mm, leftMargin=10*mm)
     doc.addPageTemplates(PageTemplate(id='ThreeCols', frames=generate_frames()))
-    doc.build(generate_navis(get_data()))
+    doc.build(generate_navis(d))
 
 
 if __name__ == '__main__':
-    create_pdf()
+    create_pdf(get_data())
