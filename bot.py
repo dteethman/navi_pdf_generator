@@ -3,7 +3,7 @@ from config import TOKEN, PROXY
 import sql
 import json
 
-apihelper.proxy = PROXY
+# apihelper.proxy = PROXY
 bot = TeleBot(TOKEN)
 
 
