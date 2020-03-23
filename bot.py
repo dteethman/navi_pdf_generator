@@ -1,6 +1,7 @@
 from telebot import TeleBot, apihelper, types
 from config import TOKEN, PROXY
 import sql
+import json
 
 apihelper.proxy = PROXY
 bot = TeleBot(TOKEN)
@@ -96,7 +97,8 @@ def handle_quantity(msg):
     buttons = [("Добавить еще", "add=1"), ("Достаточно", "add=0")]
 
     printable_data = generate_printable_data(row[0])
-    message = f"Добавлено:\n*{printable_data[0]}* - {printable_data[1]} - {printable_data[2]} - {printable_data[3]} шт."
+    message = f"Добавлено:\n*{printable_data['zone']}* - {printable_data['category']} - " \
+              f"{printable_data['title']} - {printable_data['quantity']} шт."
 
     bot.send_message(msg.chat.id, text=message, reply_markup=get_inline_keyboard(buttons), parse_mode="Markdown")
     bot.delete_message(msg.chat.id, msg.message_id)
@@ -128,10 +130,28 @@ def generate_printable_data(queue_id):
     if model is not None:
         model_str += str(model[1])
 
-    return (zone_str, category_str, model_str, quantity)
+    return {
+        "icon": "icons/listen.png",
+        "zone": zone_str,
+        "title": model_str,
+        "category": category_str,
+        "quantity": quantity
+    }
+
+
+def generate_printable_json(user_id):
+    queue = sql.get_queue(user_id)
+    user_ids = [q[0] for q in queue]
+    data = [generate_printable_data(user_id) for user_id in user_ids]
+    return json.dumps(data)
+
 
 def get_inline_keyboard(buttons):
     keyboard = types.InlineKeyboardMarkup()
     for button in buttons:
         keyboard.add(types.InlineKeyboardButton(text=button[0], callback_data=button[1]))
     return keyboard
+
+
+if __name__ == '__main__':
+    print(generate_printable_json(321391124))
