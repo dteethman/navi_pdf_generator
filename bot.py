@@ -6,6 +6,7 @@ import json
 apihelper.proxy = PROXY
 bot = TeleBot(TOKEN)
 
+
 def generate_printable_data(queue_id):
     row = sql.get_from_queue_by_id(queue_id)
     zone_str = str(sql.get_zone(row[2])[1])
