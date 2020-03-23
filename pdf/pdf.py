@@ -2,7 +2,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.platypus import SimpleDocTemplate, Frame, PageTemplate, NextPageTemplate, PageBreak
 
-from navi import Navi
+from pdf.navi import Navi
 
 import json
 
@@ -10,7 +10,7 @@ PAGE_WIDTH, PAGE_HEIGHT = A4
 
 
 def get_data():
-    f = open('data.json', encoding='utf-8')
+    f = open('pdf/data.json', encoding='utf-8')
     data = f.read()
     f.close()
     return data
@@ -42,13 +42,14 @@ def generate_frames():
     return result
 
 
-def create_pdf(data):
+def create_pdf(data, user_id):
     d = json.loads(data)
-    doc = SimpleDocTemplate('test.pdf', pagesize=A4, setTitle='Тест',
+    doc = SimpleDocTemplate(f'generated/{user_id}.pdf', pagesize=A4,
                             topMargin=10*mm, rightMargin=10*mm, bottomMargin=10*mm, leftMargin=10*mm)
     doc.addPageTemplates(PageTemplate(id='ThreeCols', frames=generate_frames()))
     doc.build(generate_navis(d))
+    return f'generated/{user_id}.pdf'
 
 
 if __name__ == '__main__':
-    create_pdf(get_data())
+    create_pdf(get_data(), 'test')

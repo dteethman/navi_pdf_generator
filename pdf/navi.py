@@ -5,8 +5,8 @@ from reportlab.platypus import Flowable, Frame, Image, Paragraph, KeepInFrame, T
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-pdfmetrics.registerFont(TTFont('OfficinaSans', 'fonts/OfficinaSansBookC.ttf'))
-pdfmetrics.registerFont(TTFont('OfficinaSerifBold', 'fonts/OfficinaSerifC-Bold.ttf'))
+pdfmetrics.registerFont(TTFont('OfficinaSans', 'pdf/fonts/OfficinaSansBookC.ttf'))
+pdfmetrics.registerFont(TTFont('OfficinaSerifBold', 'pdf/fonts/OfficinaSerifC-Bold.ttf'))
 
 
 class Navi(Flowable):
@@ -14,7 +14,7 @@ class Navi(Flowable):
         Flowable.__init__(self)
         self.width = 60*mm
         self.height = 40*mm
-        self.icon = icon
+        self.icon = 'pdf/icons/' + icon
         self.zone = zone
         if title == '':
             self.title, self.category = category, title

@@ -1,48 +1,48 @@
 [
   {
-    "icon": "icons/listen.png",
+    "icon": "listen.png",
     "zone": "Слушай",
     "title": "Inoi",
     "category": "Костнопроводящие наушники",
     "quantity": 1
   },
   {
-    "icon": "icons/hand.png",
+    "icon": "hand.png",
     "zone": "Держи",
     "title": "Vivo",
     "category": "Чехлы",
     "quantity": 1
   },
   {
-    "icon": "icons/protect.png",
+    "icon": "protect.png",
     "zone": "Защищай смартфон",
     "title": "Универсальные",
     "category": "Чехлы",
     "quantity": 1
   },
   {
-    "icon": "icons/samsung.jpg",
+    "icon": "samsung.jpg",
     "zone": "Аксессуары Samsung",
     "title": "",
     "category": "Чехлы чехлы<br/>Чехлы чехлы",
     "quantity": 1
   },
   {
-    "icon": "icons/samsung.jpg",
+    "icon": "samsung.jpg",
     "zone": "Аксессуары Samsung",
     "title": "",
     "category": "Чехлы",
     "quantity": 1
   },
   {
-    "icon": "icons/protect.png",
+    "icon": "protect.png",
     "zone": "Защищай Oppo",
     "title": "Reno Z",
     "category": "Чехлы",
     "quantity": 1
   },
   {
-    "icon": "icons/protect.png",
+    "icon": "protect.png",
     "zone": "Защищай Oppo",
     "title": "A5 2020<br/>и A9 2020",
     "category": "Чехлы",
