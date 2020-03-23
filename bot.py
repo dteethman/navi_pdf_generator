@@ -91,10 +91,16 @@ def ask_quantity(msg):
 
 
 def handle_quantity(msg):
+    row = sql.get_active_row(msg.chat.id)
     sql.update('print_queue', {'quantity': int(msg.text), 'is_active': 0}, {'user_id': msg.chat.id, 'is_active': 1})
-    buttons = [("Пожалуй", "add=1"), ("Достаточно", "add=0")]
-    bot.send_message(msg.chat.id, text='Добавить еще?', reply_markup=get_inline_keyboard(buttons))
+    buttons = [("Добавить еще", "add=1"), ("Достаточно", "add=0")]
+
+    printable_data = generate_printable_data(row[0])
+    message = f"Добавлено:\n*{printable_data[0]}* - {printable_data[1]} - {printable_data[2]} - {printable_data[3]} шт."
+
+    bot.send_message(msg.chat.id, text=message, reply_markup=get_inline_keyboard(buttons), parse_mode="Markdown")
     bot.delete_message(msg.chat.id, msg.message_id)
+    bot.delete_message(msg.chat.id, msg.message_id - 1)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('add'))
@@ -102,8 +108,27 @@ def handle_add_new(call):
     msg = call.message
     add = int(call.data.split('=')[-1])
     if add == 1:
+        bot.delete_message(msg.chat.id, msg.message_id)
         add_to_queue(msg)
+    else:
+        bot.delete_message(msg.chat.id, msg.message_id)
 
+
+def generate_printable_data(queue_id):
+    row = sql.get_from_queue_by_id(queue_id)
+    zone_str = str(sql.get_zone(row[2])[1])
+    category_str = str(sql.get_category(row[3])[2])
+    brand = sql.get_brand(row[4])
+    model = sql.get_model(row[5])
+    quantity = int(row[6])
+
+    model_str = ''
+    if brand is not None:
+        model_str += str(brand[2])
+    if model is not None:
+        model_str += str(model[1])
+
+    return (zone_str, category_str, model_str, quantity)
 
 def get_inline_keyboard(buttons):
     keyboard = types.InlineKeyboardMarkup()

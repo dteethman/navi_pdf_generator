@@ -35,7 +35,7 @@ def update(table: str, cols: dict, where: dict):
 
 
 def get_active_row(user_id):
-    return execute('SELECT * FROM print_queue WHERE user_id=?', (user_id,)).fetchone()
+    return execute('SELECT * FROM print_queue WHERE user_id=? AND is_active=1', (user_id,)).fetchone()
 
 
 def get_zones() -> list:
@@ -91,6 +91,10 @@ def delete_from_queue(user_id):
         return execute(f'DELETE FROM print_queue WHERE user_id=? AND is_active=1', (user_id,))
     except sqlite3.OperationalError as err:
         print(f'Ошибка: {err}')
+
+
+def get_from_queue_by_id(queue_id):
+    return execute('SELECT * FROM print_queue WHERE id=?', (queue_id,)).fetchone()
 
 
 if __name__ == '__main__':
