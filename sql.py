@@ -46,7 +46,7 @@ def get_active_row(user_id):
 
 
 def get_zones() -> list:
-    return execute('SELECT * FROM zones').fetchall()
+    return execute('SELECT * FROM zones ORDER BY zone ASC').fetchall()
 
 
 def get_zone(zone_id) -> tuple:
@@ -57,7 +57,8 @@ def get_categories(zone_id: int) -> list:
     return execute(
         'SELECT id, category, display_name, is_final FROM categories '
         'JOIN categories_to_zones ON id = categories_to_zones.cat_id '
-        'WHERE categories_to_zones.zone_id = ?',
+        'WHERE categories_to_zones.zone_id = ? '
+        'ORDER BY display_name',
         (zone_id,)).fetchall()
 
 
@@ -69,7 +70,8 @@ def get_brands(cat_id: int) -> list:
     return execute(
         'SELECT id, brand, display_name, is_final FROM brands '
         'JOIN brands_to_categories ON id = brands_to_categories.brand_id '
-        'WHERE brands_to_categories.cat_id = ?',
+        'WHERE brands_to_categories.cat_id = ? '
+        'ORDER BY display_name',
         (cat_id,)).fetchall()
 
 
@@ -81,7 +83,8 @@ def get_models(brand_id: int) -> list:
     return execute(
         'SELECT id, model FROM models '
         'JOIN models_to_brands ON id = models_to_brands.model_id '
-        'WHERE models_to_brands.brand_id = ?',
+        'WHERE models_to_brands.brand_id = ? '
+        'ORDER BY model',
         (brand_id,)).fetchall()
 
 
