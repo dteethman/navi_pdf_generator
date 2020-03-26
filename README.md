@@ -10,7 +10,7 @@
 ```json
 [
   {
-    "icon": "icons/protect.png",
+    "icon": "protect.png",
     "zone": "Защищай смартфон",
     "title": "Vivo",
     "category": "Чехлы",
