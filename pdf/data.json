@@ -2,15 +2,15 @@
   {
     "icon": "listen.png",
     "zone": "Слушай",
-    "title": "Inoi",
+    "title": "Константинопольский",
     "category": "Костнопроводящие наушники",
     "quantity": 1
   },
   {
     "icon": "hand.png",
     "zone": "Держи",
-    "title": "Vivo",
-    "category": "Чехлы",
+    "title": "Костнопроводящие наушники",
+    "category": "",
     "quantity": 1
   },
   {
@@ -24,13 +24,13 @@
     "icon": "samsung.jpg",
     "zone": "Аксессуары Samsung",
     "title": "",
-    "category": "Чехлы чехлы<br/>Чехлы чехлы",
+    "category": "Чехлы чехлы Чехлы чехлы",
     "quantity": 1
   },
   {
     "icon": "samsung.jpg",
     "zone": "Аксессуары Samsung",
-    "title": "",
+    "title": "iPhone 11 Pro Max",
     "category": "Чехлы",
     "quantity": 1
   },
@@ -44,7 +44,7 @@
   {
     "icon": "protect.png",
     "zone": "Защищай Oppo",
-    "title": "A5 2020<br/>и A9 2020",
+    "title": "A5 2020 и A9 2020",
     "category": "Чехлы",
     "quantity": 2
   }
