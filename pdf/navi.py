@@ -64,18 +64,20 @@ class Navi(Flowable):
 
     def draw_title(self):
         self.canv.saveState()
+
+        fsize, flead, offset = words.get_font_settings(len(self.title))
         if self.category == '':
-            offset = 5*mm if '<br/>' not in self.title else 3
+            offset = offset + 2*mm if '<br/>' not in self.title else 3
         elif '<br/>' not in self.title:
-            offset = 3*mm
+            offset = offset
         else:
             offset = 0
-        fsize, flead = words.get_font_size(len(self.title))
+
         title = words.rebuild_lines(self.title)
         style = ParagraphStyle(name='category', fontSize=fsize, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
                                alignment=1, leading=flead, splitLongWords=False, spaceShrinkage=0)
         title_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
-                           topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
+                            topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
         title_p = Paragraph(title, style)
         keep = KeepInFrame(54*mm, 16*mm, [title_p], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
         title_frame.addFromList([keep], self.canv)

@@ -1,3 +1,6 @@
+from reportlab.lib.units import mm
+
+
 def rebuild_lines(string: str) -> str:
     # s = string.split(' ')
     # for word in s:
@@ -12,21 +15,21 @@ def count_chars(word: str) -> int:
     return len(word) - word.count('&nbsp;') * 5
 
 
-def get_font_size(n: int) -> tuple:
-    a = {
-        13: 24,
-        14: 23,
-        15: 21,
-        16: 20,
-        17: 18,
-        18: 17,
-        19: 16,
+def get_font_settings(n: int) -> tuple:
+    size_and_offset = {
+        13: (24, 3*mm),
+        14: (23, 3.5*mm),
+        15: (21, 4*mm),
+        16: (20, 4.5*mm),
+        17: (18, 5*mm),
+        18: (17, 5.5*mm),
+        19: (16, 6*mm)
     }
     if 13 <= n <= 19:
-        return a[n], a[n] + 2
+        return size_and_offset[n][0], size_and_offset[n][0] + 2, size_and_offset[n][1]
     elif n < 13:
-        return a[13], a[13] + 2
-    return a[19], a[19] + 2
+        return size_and_offset[13][0], size_and_offset[13][0] + 2, size_and_offset[13][1]
+    return size_and_offset[19][0], size_and_offset[19][0] + 2, size_and_offset[19][1]
 
 
 if __name__ == '__main__':
