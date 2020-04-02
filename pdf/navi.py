@@ -5,6 +5,8 @@ from reportlab.platypus import Flowable, Frame, Image, Paragraph, KeepInFrame, T
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+import pdf.words as words
+
 pdfmetrics.registerFont(TTFont('OfficinaSans', 'pdf/fonts/OfficinaSansBookC.ttf'))
 pdfmetrics.registerFont(TTFont('OfficinaSerifBold', 'pdf/fonts/OfficinaSerifC-Bold.ttf'))
 
@@ -30,6 +32,8 @@ class Navi(Flowable):
 
         # Верхняя плашка
         self.canv.rect(0, 40 * mm - 10 * mm, self.width, 10 * mm, fill=1, stroke=0)
+
+        # Контент
         self.draw_icon()
         self.draw_zone()
         self.draw_category()
@@ -66,13 +70,15 @@ class Navi(Flowable):
             offset = 3*mm
         else:
             offset = 0
-        style = ParagraphStyle(name='category', fontSize=24, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
-                               alignment=1, leading=24, splitLongWords=False, spaceShrinkage=0)
-        zone_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
+        fsize, flead = words.get_font_size(len(self.title))
+        title = words.rebuild_lines(self.title)
+        style = ParagraphStyle(name='category', fontSize=fsize, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
+                               alignment=1, leading=flead, splitLongWords=False, spaceShrinkage=0)
+        title_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
                            topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
-        title = Paragraph(self.title, style)
-        keep = KeepInFrame(54*mm, 16*mm, [title], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
-        zone_frame.addFromList([keep], self.canv)
+        title_p = Paragraph(title, style)
+        keep = KeepInFrame(54*mm, 16*mm, [title_p], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
+        title_frame.addFromList([keep], self.canv)
         self.canv.restoreState()
 
     def draw_category(self):
