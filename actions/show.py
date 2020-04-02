@@ -1,4 +1,5 @@
-from bot import bot, get_inline_keyboard, generate_printable_data
+from bot import bot, get_inline_keyboard
+from generator import generate_printable_data
 import sql
 
 

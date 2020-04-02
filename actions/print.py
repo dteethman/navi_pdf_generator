@@ -1,5 +1,5 @@
-from bot import bot, get_inline_keyboard, generate_printable_data, generate_printable_json
-import sql
+from bot import bot
+from generator import generate_printable_json
 from pdf import pdf
 
 
