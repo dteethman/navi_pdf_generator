@@ -32,7 +32,6 @@ def degenerate(msg):
                         'is_active': 0,
                     })
 
-                print(brand)
                 if brand[3] == 1:
                     sql.insert_row('print_queue', {
                         'user_id': user_id,
@@ -44,7 +43,7 @@ def degenerate(msg):
                         'is_active': 0,
                     })
 
-            if cat[3] == 1:
+            if cat[4] == 1:
                 sql.insert_row('print_queue', {
                     'user_id': user_id,
                     'zone_id': zone[0],

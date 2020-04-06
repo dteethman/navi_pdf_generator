@@ -29,7 +29,7 @@ def generate_readable_data(queue_id):
 def generate_printable_data(queue_id):
     row = sql.get_from_queue_by_id(queue_id)
     zone_str = str(sql.get_zone(row[2])[1])
-    category_str = str(sql.get_category(row[3])[2])
+    category_str = str(sql.get_category(row[3])[3])
     brand = sql.get_brand(row[4])
     model = sql.get_model(row[5])
     quantity = int(row[6])

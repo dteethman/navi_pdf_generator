@@ -60,7 +60,7 @@ def handle_cat(call):
                {'user_id': msg.chat.id, 'is_active': 1})
 
     buttons = [(brand[2], f'brand_id={brand[0]}') for brand in brands]
-    if sql.get_category(cat_id)[3]:
+    if sql.get_category(cat_id)[4]:
         buttons.insert(0, ('Без бренда и модели', "brand_id=0"))
     buttons.insert(0, (f'⬅️ {category[2]}', f"zone_id={zone[0]}"))
     keyboard = get_inline_keyboard(buttons)

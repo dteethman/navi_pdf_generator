@@ -55,7 +55,7 @@ def get_zone(zone_id) -> tuple:
 
 def get_categories(zone_id: int) -> list:
     return execute(
-        'SELECT id, category, display_name, is_final FROM categories '
+        'SELECT id, category, display_name, print_name, is_final FROM categories '
         'JOIN categories_to_zones ON id = categories_to_zones.cat_id '
         'WHERE categories_to_zones.zone_id = ? '
         'ORDER BY display_name',
