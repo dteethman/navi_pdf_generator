@@ -1,5 +1,5 @@
 from bot import bot, get_inline_keyboard
-from generator import generate_printable_data
+from generator import generate_readable_data
 import sql
 
 
@@ -91,7 +91,7 @@ def handle_brand(call):
 
     if len(models) != 0:
         buttons = [(model[1], f'model_id={model[0]}') for model in models]
-        if sql.get_brand(brand_id)[3]:
+        if sql.get_brand(brand_id)[4]:
             buttons.insert(0, ('Без модели', "model_id=0"))
         buttons.insert(0, (f'⬅ {brand[2]}', f"cat_id={category[0]}"))
         keyboard = get_inline_keyboard(buttons)
@@ -154,9 +154,9 @@ def handle_quantity(msg):
         sql.update('print_queue', {'quantity': quantity, 'is_active': 0}, {'user_id': msg.chat.id, 'is_active': 1})
         buttons = [("Добавить еще", "start=1"), ("Достаточно", "start=0")]
 
-        printable_data = generate_printable_data(row[0])
-        message = f"Добавлено:\n*{printable_data['zone']}* - {printable_data['category']} - " \
-                  f"{printable_data['title']} - {printable_data['quantity']} шт."
+        readable_data = generate_readable_data(row[0])
+        message = f"Добавлено:\n*{readable_data['zone']}* - {readable_data['category']} - " \
+                  f"{readable_data['title']} - {readable_data['quantity']} шт."
 
         bot.send_message(msg.chat.id, text=message, reply_markup=get_inline_keyboard(buttons), parse_mode="Markdown")
         bot.delete_message(msg.chat.id, msg.message_id)

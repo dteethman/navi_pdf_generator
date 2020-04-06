@@ -68,7 +68,7 @@ def get_category(cat_id) -> tuple:
 
 def get_brands(cat_id: int) -> list:
     return execute(
-        'SELECT id, brand, display_name, is_final FROM brands '
+        'SELECT id, brand, display_name, is_final, is_ignored FROM brands '
         'JOIN brands_to_categories ON id = brands_to_categories.brand_id '
         'WHERE brands_to_categories.cat_id = ? '
         'ORDER BY display_name',

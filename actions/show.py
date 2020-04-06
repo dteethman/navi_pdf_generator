@@ -1,5 +1,5 @@
 from bot import bot, get_inline_keyboard
-from generator import generate_printable_data
+from generator import generate_readable_data
 import sql
 
 
@@ -13,7 +13,7 @@ def show(msg):
     sql.delete_from_queue(msg.chat.id)
     queue = sql.get_queue(msg.chat.id)
     q_ids = [q[0] for q in queue]
-    data = [generate_printable_data(q_id) for q_id in q_ids]
+    data = [generate_readable_data(q_id) for q_id in q_ids]
     message = ''
     if len(data) > 0:
         for i, d in enumerate(data):

@@ -39,7 +39,7 @@ def handle_clear(call):
         bot.send_message(msg.chat.id, text=message, reply_markup=keyboard, parse_mode='Markdown')
     else:
         bot.delete_message(msg.chat.id, msg.message_id)
-        message = 'Очитка отменена'
+        message = 'Очистка отменена'
         buttons = [('❌ Закрыть', 'start=0')]
         keyboard = get_inline_keyboard(buttons)
         bot.send_message(msg.chat.id, text=message, reply_markup=keyboard, parse_mode='Markdown')
