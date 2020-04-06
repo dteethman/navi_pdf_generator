@@ -65,20 +65,19 @@ class Navi(Flowable):
     def draw_title(self):
         self.canv.saveState()
 
-        fsize, flead, offset = words.get_font_settings(len(self.title))
+        fsize, flead, offset = words.get_font_settings(self.title)
         if self.category == '':
-            offset = offset + 2*mm if '<br/>' not in self.title else 3
+            offset = offset + 2*mm if '<br/>' not in self.title else offset * 0.2 + 2*mm
         elif '<br/>' not in self.title:
             offset = offset
         else:
-            offset = 0
+            offset = offset * 0.2
 
-        title = words.rebuild_lines(self.title)
         style = ParagraphStyle(name='category', fontSize=fsize, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
                                alignment=1, leading=flead, splitLongWords=False, spaceShrinkage=0)
         title_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
                             topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
-        title_p = Paragraph(title, style)
+        title_p = Paragraph(self.title, style)
         keep = KeepInFrame(54*mm, 16*mm, [title_p], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
         title_frame.addFromList([keep], self.canv)
         self.canv.restoreState()
@@ -89,7 +88,7 @@ class Navi(Flowable):
                                alignment=1, leading=12, splitLongWords=False, spaceShrinkage=0)
         category_frame = Frame(3*mm, 3*mm, 54*mm, 5*mm, showBoundary=0,
                                topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
-        category = Paragraph(self.category, style)
+        category = Paragraph(self.category.replace('<br/>', ' '), style)
         keep = KeepInFrame(54*mm, 5*mm, [category], hAlign='CENTER', vAlign='BOTTOM', fakeWidth=False)
         category_frame.addFromList([keep], self.canv)
         self.canv.restoreState()

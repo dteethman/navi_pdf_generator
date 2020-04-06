@@ -1,21 +1,17 @@
 from reportlab.lib.units import mm
 
 
-def rebuild_lines(string: str) -> str:
-    # s = string.split(' ')
-    # for word in s:
-    #     l = count_chars(word)
-    # return None
-    if len(string) <= 19:
-        return string.replace(' ', '&nbsp;')
-    return string
+def count_chars(string: str) -> int:
+    if '<br/>' in string:
+        s = string.split('<br/>')
+        length = len(s[0]) if s[0] > s[1] else len(s[1])
+    else:
+        length = len(string)
+    return length - string.count('&nbsp;') * 5 - string.count('&amp;') * 4
 
 
-def count_chars(word: str) -> int:
-    return len(word) - word.count('&nbsp;') * 5
-
-
-def get_font_settings(n: int) -> tuple:
+def get_font_settings(string: str) -> tuple:
+    n = count_chars(string)
     size_and_offset = {
         13: (24, 3*mm),
         14: (23, 3.5*mm),
@@ -30,11 +26,3 @@ def get_font_settings(n: int) -> tuple:
     elif n < 13:
         return size_and_offset[13][0], size_and_offset[13][0] + 2, size_and_offset[13][1]
     return size_and_offset[19][0], size_and_offset[19][0] + 2, size_and_offset[19][1]
-
-
-if __name__ == '__main__':
-    print(rebuild_lines('Костнопроводящие наушники'), 'Костнопроводящие<br/>наушники')
-    print(rebuild_lines('Константинопольский Константинопольский'), 'Константинопольский<br/>Константинопольский')
-    print(rebuild_lines('A5 2020 и A9 2020'), 'A5&nbsp;2020&nbsp;и&nbsp;A9&nbsp;2020')
-    print(rebuild_lines('Чехлы чехлы Чехлы чехлы'), 'Чехлы&nbsp;чехлы<br/>Чехлы&nbsp;чехлы')
-    print(rebuild_lines('iPhone 11 Pro Max'), 'iPhone&nbsp;11&nbsp;Pro&nbsp;Max')
