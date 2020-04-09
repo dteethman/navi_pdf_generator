@@ -149,10 +149,29 @@ def ask_quantity(msg):
 
 def handle_quantity(msg):
     row = sql.get_active_row(msg.chat.id)
+    zone_id = row[2]
+    cat_id = row[3]
+    brand_id = row[4]
+    model_id = row[5]
+
     try:
         quantity = int(msg.text)
         sql.update('print_queue', {'quantity': quantity, 'is_active': 0}, {'user_id': msg.chat.id, 'is_active': 1})
-        buttons = [("Добавить еще", "start=1"), ("Достаточно", "start=0")]
+        sql.insert_row("print_queue",
+                       {
+                           'user_id': msg.chat.id,
+                           'zone_id': zone_id,
+                           'cat_id': cat_id,
+                           'brand_id': brand_id,
+                           'model_id': model_id,
+                           'is_active': 1,
+                       })
+        if model_id is not None:
+            button = f'brand_id={brand_id}'
+        else:
+            button = f'cat_id={cat_id}'
+
+        buttons = [("Добавить еще", button), ("Достаточно", "start=0")]
 
         readable_data = generate_readable_data(row[0])
         message = f"Добавлено:\n*{readable_data['zone']}* - {readable_data['category']} - " \

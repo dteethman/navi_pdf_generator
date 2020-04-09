@@ -12,8 +12,9 @@ def generate_readable_data(queue_id):
     icon = str(sql.get_zone(row[2])[2])
 
     model_str = ''
-    if brand is not None and brand[5] == 0:
-        model_str += f'{brand[2]} '
+    if brand is not None:
+        if brand[5] == 0 or model is None:
+            model_str += f'{brand[2]} '
     if model is not None:
         model_str += f'{model[1]}'
 
@@ -36,8 +37,9 @@ def generate_printable_data(queue_id):
     icon = str(sql.get_zone(row[2])[2])
 
     model_str = ''
-    if brand is not None and brand[5] == 0:
-        model_str += f'{brand[3]} '
+    if brand is not None:
+        if brand[5] == 0 or model is None:
+            model_str += f'{brand[3]} '
     if model is not None:
         model_str += f'{model[2]}'
 
