@@ -75,10 +75,10 @@ class Navi(Flowable):
 
         style = ParagraphStyle(name='category', fontSize=fsize, fontName='OfficinaSans', textColor=Color(0, 0, 0, 1),
                                alignment=1, leading=flead, splitLongWords=False, spaceShrinkage=0)
-        title_frame = Frame(3*mm, 12*mm - offset, 54*mm, 16*mm, showBoundary=0,
+        title_frame = Frame(2.5*mm, 12*mm - offset, 55*mm, 16*mm, showBoundary=0,
                             topPadding=0, rightPadding=0, bottomPadding=0, leftPadding=0)
         title_p = Paragraph(self.title, style)
-        keep = KeepInFrame(54*mm, 16*mm, [title_p], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
+        keep = KeepInFrame(55*mm, 16*mm, [title_p], hAlign='CENTER', vAlign='MIDDLE', fakeWidth=False)
         title_frame.addFromList([keep], self.canv)
         self.canv.restoreState()
 
