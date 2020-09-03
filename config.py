@@ -1,2 +1,4 @@
-TOKEN = '1234852945:AAHv9TvPSm0AP7OccrKF2WfW7EBz1y95LN8'
+import os
+
+TOKEN = os.environ.get('TOKEN', None)
 PROXY = {'https': 'https://163.172.189.32:8811'}
