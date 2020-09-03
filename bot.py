@@ -3,7 +3,7 @@ from config import TOKEN, PROXY
 
 # apihelper.proxy = PROXY
 bot = TeleBot(TOKEN)
-
+print(TOKEN)
 
 def get_inline_keyboard(buttons):
     keyboard = types.InlineKeyboardMarkup()
