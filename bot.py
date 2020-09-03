@@ -1,5 +1,5 @@
-from telebot import TeleBot, apihelper, types
-from config import TOKEN, PROXY
+from telebot import TeleBot, types
+from config import TOKEN
 
 bot = TeleBot(TOKEN)
 print(TOKEN)
