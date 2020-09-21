@@ -1,6 +1,8 @@
-import sqlite3
+import psycopg2
+import os
 
-conn = sqlite3.connect('database.db', check_same_thread=False)
+conn = psycopg2.connect(dbname=os.environ.get('PGDATABASE', None), user=os.environ.get('PGUSER', None),
+                        password=os.environ.get('PGPASSWORD', None), host=os.environ.get('PGHOST', None))
 
 
 def execute(query, data=None):
