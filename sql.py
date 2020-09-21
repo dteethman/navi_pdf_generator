@@ -39,7 +39,7 @@ def update(table: str, cols: dict, where: dict):
 def delete(table: str, where: str, equal):
     try:
         return execute(f'DELETE FROM {table} WHERE {where}=?', (equal,))
-    except sqlite3.OperationalError as err:
+    except psycopg2.OperationalError as err:
         print(f'Ошибка: {err}')
 
 
@@ -101,7 +101,7 @@ def add_to_queue(cols: dict, user_id):
 def delete_from_queue(user_id):
     try:
         return execute(f'DELETE FROM print_queue WHERE user_id=? AND is_active=1', (user_id,))
-    except sqlite3.OperationalError as err:
+    except psycopg2.OperationalError as err:
         print(f'Ошибка: {err}')
 
 
