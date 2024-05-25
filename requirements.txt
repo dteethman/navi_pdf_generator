@@ -1,5 +1,5 @@
 pyTelegramBotAPI==3.6.7
-reportlab==3.5.42
+reportlab==3.6.13
 Flask==2.3.2
 gunicorn==20.0.4
 inotify==0.2.10
